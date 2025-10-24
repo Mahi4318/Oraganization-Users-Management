@@ -1,4 +1,4 @@
-from database import engine
+from backend.database.database import engine
 from models import Base
 
 def create_tables():

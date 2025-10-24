@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from database import engine, Base, get_db
+from backend.database.database import engine, Base, get_db
 from models import Organisation, User
 from routers import organisations
 from fastapi.middleware.cors import CORSMiddleware

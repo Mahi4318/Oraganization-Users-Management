@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func, Bool
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID # Import for PostgreSQL UUID support (optional, but good practice)
 import uuid # For generating default UUIDs
-from database import Base # Assuming 'Base' is imported from your database setup
+from backend.database.database import Base # Assuming 'Base' is imported from your database setup
 
 # ----------------------------------------------------------------------------------
 # Organisation Model (Updated with UUID and Timestamps)

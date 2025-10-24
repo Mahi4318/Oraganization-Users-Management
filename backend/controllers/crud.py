@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import joinedload
 from models import Organisation, User
-from schemas import OrganisationCreate, UserCreate # Assuming UserCreate now includes org_id
+from backend.schemas.schemas import OrganisationCreate, UserCreate # Assuming UserCreate now includes org_id
 
 # --- Organisation functions remain the same ---
 
