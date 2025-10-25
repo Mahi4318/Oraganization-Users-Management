@@ -1,13 +1,18 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from backend.database.database import engine, Base, get_db
+from database.database import engine, Base, get_db
 from models import Organisation, User
 from routers import organisations
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+import os
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Organization & Users Management")
+
+# Get port from environment variable or use default
+port = int(os.environ.get("PORT", 8000))
 
 app.add_middleware(
 CORSMiddleware,
@@ -28,3 +33,6 @@ def get_all_organizations(db: Session = Depends(get_db)):
 
     # 2. Return the list (FastAPI/Pydantic handles serialization)
     return organizations
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
