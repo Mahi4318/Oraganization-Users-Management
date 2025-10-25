@@ -1,285 +1,190 @@
-# InterviewBuddy - B2B Organization Management Platform
+# InterviewBuddy Full Stack Application
 
-A full-stack web application for managing B2B organizations with user management, support system, and comprehensive admin features.
+A comprehensive full-stack web application for managing organizations and users, designed to streamline interview coordination and management processes.
 
-## 🚀 Features
+## 🚀 Main Functionality
 
-### Core Functionality
-- **Organization Management**: Create, read, update, and delete organizations
-- **User Management**: Add, edit, and remove users within organizations
-- **Status Management**: Change organization status (Active, Blocked, Inactive)
-- **Support System**: Complete support ticket system with priority levels
-- **Real-time Updates**: All changes are instantly reflected in the database
+InterviewBuddy is a robust organization and user management system that provides:
 
-### Frontend Features
-- **Modern UI**: Built with React, TypeScript, and Tailwind CSS
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
-- **Interactive Components**: Rich UI components with smooth animations
-- **Edit Functionality**: In-place editing with save/cancel options
-- **Navigation**: Clean navbar with support for multiple pages
+- **Organization Management**: Create, read, update, and delete organizations with comprehensive details
+- **User Management**: Manage users within organizations with role-based access
+- **Status Tracking**: Monitor organization status (Active, Blocked, Inactive)
+- **Admin Dashboard**: Centralized interface for managing all organizational data
+- **Support System**: Integrated support functionality for assistance and inquiries
 
-### Backend Features
-- **FastAPI**: High-performance async REST API
-- **MySQL Database**: Robust data persistence with proper relationships
-- **CRUD Operations**: Complete Create, Read, Update, Delete functionality
-- **Data Validation**: Input validation and error handling
-- **CORS Support**: Cross-origin resource sharing enabled
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **React 18.3.1**: Modern UI framework with hooks
-- **TypeScript**: Type-safe JavaScript development
-- **Tailwind CSS**: Utility-first CSS framework
-- **Shadcn/ui**: High-quality component library
-- **Lucide React**: Beautiful icon library
-- **React Router**: Client-side routing
-- **React Query**: Server state management and caching
+## 🛠️ Technologies Used
 
 ### Backend
-- **FastAPI**: Modern, fast web framework for building APIs
-- **SQLAlchemy**: Powerful ORM for database operations
-- **MySQL**: Relational database management
+- **FastAPI**: Modern, fast web framework for building APIs with Python
+- **SQLAlchemy**: Powerful SQL toolkit and Object-Relational Mapping (ORM) library
+- **PyMySQL**: Pure Python MySQL client library
 - **Pydantic**: Data validation using Python type annotations
-- **Uvicorn**: ASGI server for production deployment
+- **Uvicorn**: ASGI server implementation for running FastAPI applications
+- **Python-dotenv**: Environment variable management
 
-### Development Tools
+### Frontend
+- **React 18**: Modern JavaScript library for building user interfaces
+- **TypeScript**: Typed superset of JavaScript for enhanced development experience
 - **Vite**: Fast build tool and development server
-- **ESLint**: Code linting and formatting
-- **Git**: Version control system
+- **React Router DOM**: Declarative routing for React applications
+- **React Query**: Powerful data fetching and state management library
+- **React Hook Form**: Performant, flexible, and extensible forms library
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
+- **shadcn/ui**: Beautifully designed components built with Radix UI and Tailwind CSS
+- **Lucide React**: Consistent icon library for React applications
+
+### Database
+- **MySQL**: Relational database management system
+- **UUID**: Unique identifiers for primary keys ensuring global uniqueness
 
 ## 📁 Project Structure
 
 ```
 InterviewBuddyFullStack/
-├── backend/                    # FastAPI backend
-│   ├── routers/              # API route definitions
-│   ├── models.py              # Database models (SQLAlchemy)
-│   ├── crud.py                # CRUD operations
-│   ├── schemas.py              # Pydantic models
-│   ├── database.py            # Database configuration
-│   ├── main.py                # Application entry point
-│   └── requirements.txt       # Python dependencies
-├── frontend/                  # React frontend
-│   └── pixel-perfect-realized-main/
-│       ├── src/
-│       │   ├── components/     # Reusable UI components
-│       │   ├── pages/         # Page components
-│       │   └── main.tsx       # App entry point
-│       ├── public/              # Static assets
-│       ├── package.json        # Node.js dependencies
-│       └── vite.config.ts      # Vite configuration
+├── backend/                    # FastAPI backend application
+│   ├── main.py                # Main FastAPI application entry point
+│   ├── models.py              # SQLAlchemy database models
+│   ├── requirements.txt       # Python dependencies
+│   ├── controllers/           # Business logic and CRUD operations
+│   │   └── crud.py
+│   ├── database/              # Database configuration and setup
+│   │   ├── database.py
+│   │   └── create_tables.py
+│   ├── routers/               # API route definitions
+│   │   ├── organisations.py
+│   │   └── users.py
+│   └── schemas/               # Pydantic data validation schemas
+│       └── schemas.py
+├── frontend/                  # React frontend application
+│   ├── src/
+│   │   ├── components/        # Reusable React components
+│   │   │   ├── ui/            # shadcn/ui components
+│   │   │   └── Layout.tsx     # Main layout component
+│   │   ├── pages/             # Page components
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Organizations.tsx
+│   │   │   ├── OrganizationDetails.tsx
+│   │   │   ├── Support.tsx
+│   │   │   └── NotFound.tsx
+│   │   ├── hooks/             # Custom React hooks
+│   │   ├── lib/               # Utility functions and configurations
+│   │   ├── App.tsx            # Main App component with routing
+│   │   └── main.tsx           # Application entry point
+│   ├── package.json           # Node.js dependencies and scripts
+│   ├── vite.config.ts         # Vite configuration
+│   ├── tailwind.config.ts     # Tailwind CSS configuration
+│   └── tsconfig.json          # TypeScript configuration
 └── README.md                  # This file
 ```
 
-## 🗄️ Database Schema
+## 🏗️ Database Schema
 
-### Organisation Table
-- `org_id`: Primary key (UUID)
-- `org_name`: Organization name (unique, required)
-- `org_mail`: Organization email
-- `org_contact`: Contact phone number
-- `org_slug`: URL-friendly identifier (unique)
-- `status`: Organization status (Active/Blocked/Inactive)
-- `pending_requests`: Number of pending requests
-- `primary_admin_name`: Primary administrator name
-- `primary_admin_mail`: Primary administrator email
-- `support_email`: Support contact email
-- `phone`: Primary phone number
-- `alt_phone`: Alternative phone number
-- `max_coordinators`: Maximum allowed coordinators
-- `timezone_common`: Timezone common name
-- `timezone_region`: Timezone region
-- `language`: Organization language
-- `website_url`: Official website URL
-- `created_date`: Record creation timestamp
-- `updated_date`: Last update timestamp
+### Organisation Model
+- **org_id**: UUID primary key
+- **org_name**: Unique organization name
+- **org_mail**: Organization email
+- **org_contact**: Contact information
+- **org_slug**: Unique URL-friendly identifier
+- **status**: Organization status (Active, Blocked, Inactive)
+- **pending_requests**: Count of pending requests
+- **primary_admin_name/email**: Primary administrator details
+- **support_email**: Support contact email
+- **phone/alt_phone**: Contact phone numbers
+- **max_coordinators**: Maximum allowed coordinators
+- **timezone**: Timezone settings
+- **language**: Default language
+- **website_url**: Organization website
+- **created_date/updated_date**: Timestamps
 
-### User Table
-- `user_id`: Primary key (UUID)
-- `user_name`: User full name
-- `user_role`: User role (Admin/Coordinator)
-- `org_id`: Foreign key to organisation
-- `created_date`: Account creation timestamp
-- `updated_date`: Last update timestamp
+### User Model
+- **user_id**: UUID primary key
+- **user_name**: User's name
+- **user_role**: User's role within the organization
+- **org_id**: Foreign key referencing the organization
+- **created_date/updated_date**: Timestamps
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js 18+**: Frontend runtime
-- **Python 3.8+**: Backend runtime
-- **MySQL 8.0+**: Database server
-- **Git**: Version control
+- Python 3.8+
+- Node.js 16+
+- MySQL database
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd InterviewBuddyFullStack
-   ```
-
-2. **Set up the backend**
+### Backend Setup
+1. Navigate to the backend directory:
    ```bash
    cd backend
+   ```
+
+2. Install Python dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. **Configure environment variables**
+3. Set up your database connection in the environment variables
+
+4. Run database migrations:
    ```bash
-   cp .env.example .env
-   # Edit .env with your database credentials
+   python database/create_tables.py
    ```
 
-4. **Create database tables**
+5. Start the FastAPI server:
    ```bash
-   python create_tables.py
+   uvicorn main:app --reload
    ```
 
-5. **Start the backend server**
+The backend API will be available at `http://localhost:8000`
+
+### Frontend Setup
+1. Navigate to the frontend directory:
    ```bash
-   python main.py
+   cd frontend
    ```
 
-6. **Set up the frontend**
+2. Install Node.js dependencies:
    ```bash
-   cd frontend/pixel-perfect-realized-main
    npm install
    ```
 
-7. **Start the frontend development server**
+3. Start the development server:
    ```bash
    npm run dev
    ```
 
-### Access Points
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
+The frontend application will be available at `http://localhost:5173`
 
 ## 📚 API Endpoints
 
 ### Organizations
-- `GET /organisations` - List all organizations
-- `POST /organisations` - Create new organization
-- `GET /organisations/{id}` - Get organization by ID
-- `PUT /organisations/{id}` - Update organization
-- `DELETE /organisations/{id}` - Delete organization
-- `PUT /organisations/{id}/status` - Change organization status
+- `GET /` - Get all organizations
+- `POST /organisations/` - Create a new organization
+- `GET /organisations/{org_id}` - Get organization by ID
+- `PUT /organisations/{org_id}` - Update organization
+- `PUT /organisations/{org_id}/status` - Update organization status
+- `DELETE /organisations/{org_id}` - Delete organization
 
-### Users
-- `POST /organisations/{id}/users` - Add user to organization
-- `PUT /organisations/{id}/users/{user_id}` - Update user
-- `DELETE /organisations/{id}/users/{user_id}` - Delete user
+### Users (within organizations)
+- `POST /organisations/{org_id}/users` - Create user for organization
+- `PUT /organisations/{org_id}/users/{user_id}` - Update user
+- `DELETE /organisations/{org_id}/users/{user_id}` - Delete user
 
-## 🔧 Configuration
+## 🎯 Key Features
 
-### Environment Variables
-Create a `.env` file in the backend directory with:
+- **Modern Architecture**: Clean separation of concerns with RESTful API design
+- **Type Safety**: Full TypeScript support across frontend and backend
+- **Responsive Design**: Mobile-friendly interface using Tailwind CSS
+- **Data Validation**: Comprehensive input validation using Pydantic schemas
+- **Error Handling**: Robust error handling and user feedback
+- **Scalable Design**: Modular architecture for easy scaling and maintenance
+- **Real-time Updates**: React Query for efficient data synchronization
 
-```env
-DB_USER=your_mysql_username
-DB_PASSWORD=your_mysql_password
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=org_user_db
-```
+## 🔧 Development
 
-### Database Setup
-1. Install MySQL Server
-2. Create database: `CREATE DATABASE org_user_db;`
-3. Run table creation script
-4. Verify tables are created successfully
-
-## 🎨 UI Features
-
-### Navigation
-- **Logo**: Company branding in the header
-- **Support**: Access to support system with headphones icon
-- **Notifications**: Notification center with bell icon
-- **Profile**: User profile management
-- **Dashboard**: Main dashboard view
-- **Organizations**: Organization management interface
-
-### Organization Management
-- **List View**: Table view of all organizations
-- **Details View**: Comprehensive organization information
-- **Edit Mode**: In-place editing with save/cancel
-- **Status Management**: Quick status changes
-- **User Management**: Add/edit/remove users per organization
-
-### Support System
-- **Ticket Submission**: Create support tickets with priority levels
-- **FAQ Section**: Common questions and answers
-- **Contact Methods**: Multiple support channels
-- **Response Tracking**: Expected response times by priority
-
-## 🔒 Security Features
-
-- **Input Validation**: All user inputs are validated
-- **SQL Injection Protection**: Parameterized queries
-- **CORS Configuration**: Secure cross-origin requests
-- **Environment Variables**: Sensitive data in environment files
-- **Type Safety**: TypeScript and Pydantic for type safety
-
-## 🚀 Deployment
-
-### Production Deployment
-
-1. **Backend Deployment**
-   ```bash
-   cd backend
-   pip install gunicorn
-   gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
-   ```
-
-2. **Frontend Deployment**
-   ```bash
-   cd frontend/pixel-perfect-realized-main
-   npm run build
-   # Deploy the dist/ folder to your web server
-   ```
-
-### Environment Configuration
-- **Development**: Local development with hot reload
-- **Staging**: Pre-production testing environment
-- **Production**: Optimized build for production
-
-## 📝 Development Workflow
+### Running Tests
+- Backend tests can be run from the backend directory
+- Frontend tests can be run using npm test
 
 ### Code Quality
-- **ESLint**: Consistent code formatting
-- **TypeScript**: Type-safe development
-- **Pylint**: Python code quality checks
-- **Pre-commit**: Automated code quality gates
-
-### Testing Strategy
-- **Unit Tests**: Component and function testing
-- **Integration Tests**: API endpoint testing
-- **E2E Tests**: End-to-end user workflows
-- **Database Tests**: Data integrity validation
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙋 Support
-
-For support and questions:
-- Create an issue in the GitHub repository
-- Use the in-app support system
-- Email: support@interviewbuddy.com
-
----
-
-**Built with ❤️ using modern web technologies**
-#   O r a g a n i z a t i o n - U s e r s - M a n a g e m e n t  
- 
+- ESLint for JavaScript/TypeScript linting
+- Prettier for code formatting
+- TypeScript for static type checking
